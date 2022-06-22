@@ -10,7 +10,17 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class MakeDrinkCommand extends Command
 {
-    protected static $defaultName = 'app:order-drink';
+	protected static $defaultName              = 'app:order-drink';
+	
+	private const DRINK_TYPE_ARGUMENT_NAME                      = 'drink-type';
+	private const DRINK_TYPE_ARGUMENT_DESCRIPTION               = 'The type of the drink. (Tea, Coffee or Chocolate)';
+	private const MONEY_ARGUMENT_NAME                           = 'money';
+	private const MONEY_ARGUMENT_DESCRIPTION                    = 'The amount of money given by the user';
+	private const SUGARS_ARGUMENT_NAME                          = 'sugars';
+	private const SUGAR_ARGUMENT_DESCRIPTION                    = 'The number of sugars you want. (0, 1, 2)';
+	private const EXTRA_HOT_OPTION_NAME                         = 'extra-hot';
+	private const EXTRA_HOT_OPTION_SHORTCUT                     = 'e';
+	private const EXTRA_HOT_OPTION_DESCRIPTION 					= 'If the user wants to make the drink extra hot';
 
     public function __construct()
     {
@@ -21,35 +31,38 @@ class MakeDrinkCommand extends Command
     protected function configure(): void
     {
         $this->addArgument(
-            'drink-type',
-            InputArgument::REQUIRED,
-            'The type of the drink. (Tea, Coffee or Chocolate)'
+			self::DRINK_TYPE_ARGUMENT_NAME,
+			InputArgument::REQUIRED,
+			self::DRINK_TYPE_ARGUMENT_DESCRIPTION
+		);
+
+        $this->addArgument(
+			self::MONEY_ARGUMENT_NAME,
+			InputArgument::REQUIRED,
+			self::MONEY_ARGUMENT_DESCRIPTION
         );
 
         $this->addArgument(
-            'money',
-            InputArgument::REQUIRED,
-            'The amount of money given by the user'
-        );
-
-        $this->addArgument(
-            'sugars',
-            InputArgument::OPTIONAL,
-            'The number of sugars you want. (0, 1, 2)',
-            0
+			self::SUGARS_ARGUMENT_NAME,
+			InputArgument::OPTIONAL,
+			self::SUGAR_ARGUMENT_DESCRIPTION,
+			0
         );
 
         $this->addOption(
-            'extra-hot',
-            'e',
-            InputOption::VALUE_NONE,
-            $description = 'If the user wants to make the drink extra hot'
+			self::EXTRA_HOT_OPTION_NAME,
+			self::EXTRA_HOT_OPTION_SHORTCUT,
+			InputOption::VALUE_NONE,
+			$description = self::EXTRA_HOT_OPTION_DESCRIPTION
         );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $drinkType = strtolower($input->getArgument('drink-type'));
+        $drinkType = strtolower($input->getArgument(self::DRINK_TYPE_ARGUMENT_NAME));
+		$money = $input->getArgument(self::MONEY_ARGUMENT_NAME);
+		$sugars = $input->getArgument(self::SUGARS_ARGUMENT_NAME);
+		$extraHot = $input->getOption(self::EXTRA_HOT_OPTION_NAME);
         if (!in_array($drinkType, ['tea', 'coffee', 'chocolate'])) {
             $output->writeln('The drink type should be tea, coffee or chocolate.');
         } else {
@@ -58,7 +71,6 @@ class MakeDrinkCommand extends Command
              * Coffee    --> 0.5
              * Chocolate --> 0.6
              */
-            $money = $input->getArgument('money');
             switch ($drinkType) {
                 case 'tea':
                     if ($money < 0.4) {
@@ -80,9 +92,7 @@ class MakeDrinkCommand extends Command
                     break;
             }
 
-            $sugars = $input->getArgument('sugars');
             $stick = false;
-            $extraHot = $input->getOption('extra-hot');
             if ($sugars >= 0 && $sugars <= 2) {
                 $output->write('You have ordered a ' . $drinkType);
                 if ($extraHot) {
