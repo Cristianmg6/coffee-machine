@@ -5,7 +5,7 @@ namespace GetWith\CoffeeMachine\Console\DrinkType\Domain\Contract;
 use GetWith\CoffeeMachine\Console\DrinkType\Domain\Collection\DrinkTypeCollection;
 use GetWith\CoffeeMachine\Console\DrinkType\Domain\Entity\DrinkType;
 use GetWith\CoffeeMachine\Console\DrinkType\Domain\Exception\DrinkTypeNotFoundException;
-use GetWith\CoffeeMachine\Console\DrinkType\Domain\ValueObject\DrinkTypeName;
+use GetWith\CoffeeMachine\Console\Shared\Domain\ValueObject\DrinkTypeName;
 
 interface DrinkTypeRepositoryInterface
 {

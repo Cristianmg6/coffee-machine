@@ -2,9 +2,9 @@
 
 namespace GetWith\CoffeeMachine\Console\DrinkType\Domain\Entity;
 
-use GetWith\CoffeeMachine\Console\DrinkType\Domain\ValueObject\DrinkTypeCost;
+use GetWith\CoffeeMachine\Console\Shared\Domain\ValueObject\DrinkTypeCost;
 use GetWith\CoffeeMachine\Console\DrinkType\Domain\ValueObject\DrinkTypeId;
-use GetWith\CoffeeMachine\Console\DrinkType\Domain\ValueObject\DrinkTypeName;
+use GetWith\CoffeeMachine\Console\Shared\Domain\ValueObject\DrinkTypeName;
 
 final class DrinkType
 {

@@ -3,7 +3,8 @@
 namespace GetWith\CoffeeMachine\Console\Order\Application\MakeOrder;
 
 use Exception;
-use GetWith\CoffeeMachine\Console\DrinkType\Domain\Entity\DrinkType;
+use GetWith\CoffeeMachine\Console\Shared\Domain\ValueObject\DrinkTypeCost;
+use GetWith\CoffeeMachine\Console\Shared\Domain\ValueObject\DrinkTypeName;
 use GetWith\CoffeeMachine\Console\Order\Domain\Entity\Order;
 use GetWith\CoffeeMachine\Console\Order\Domain\ValueObject\OrderExtraHot;
 use GetWith\CoffeeMachine\Console\Order\Domain\ValueObject\OrderMoney;
@@ -14,15 +15,15 @@ final class MakeOrderService
 	public function __construct(){ }
 	
 	/** * @throws Exception */
-	public function __invoke(DrinkType $drinkType, OrderMoney $money, OrderSugars $sugars, OrderExtraHot $extraHot): string
+	public function __invoke(DrinkTypeName $drinkTypeName, DrinkTypeCost $drinkTypeCost, OrderMoney $money, OrderSugars $sugars, OrderExtraHot $extraHot): string
 	{
-		$order = new Order($drinkType, $sugars, $money, $extraHot);
+		$order = new Order($drinkTypeName, $drinkTypeCost, $sugars, $money, $extraHot);
 		return $this->getOrderResponse($order);
 	}
 	
 	protected function getOrderResponse(Order $order) : string
 	{
-		$response = 'You have ordered a '.$order->drinkType()->name()->value();
+		$response = 'You have ordered a '.$order->drinkTypeName()->value();
 		if($order->isExtraHot()){
 			$response .= ' extra hot';
 		}

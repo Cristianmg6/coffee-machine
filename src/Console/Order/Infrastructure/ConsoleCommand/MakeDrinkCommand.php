@@ -4,7 +4,6 @@ namespace GetWith\CoffeeMachine\Console\Order\Infrastructure\ConsoleCommand;
 
 use GetWith\CoffeeMachine\Console\Order\Application\MakeOrder\MakeOrderQuery;
 use GetWith\CoffeeMachine\Console\Order\Application\MakeOrder\MakeOrderQueryHandler;
-use GetWith\CoffeeMachine\Console\Order\Application\MakeOrder\MakeOrderService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

@@ -3,7 +3,8 @@
 namespace GetWith\CoffeeMachine\Console\Order\Domain\Entity;
 
 use Exception;
-use GetWith\CoffeeMachine\Console\DrinkType\Domain\Entity\DrinkType;
+use GetWith\CoffeeMachine\Console\Shared\Domain\ValueObject\DrinkTypeCost;
+use GetWith\CoffeeMachine\Console\Shared\Domain\ValueObject\DrinkTypeName;
 use GetWith\CoffeeMachine\Console\Order\Domain\Exception\InvalidMoneyException;
 use GetWith\CoffeeMachine\Console\Order\Domain\ValueObject\OrderExtraHot;
 use GetWith\CoffeeMachine\Console\Order\Domain\ValueObject\OrderMoney;
@@ -13,7 +14,8 @@ final class Order
 {
 	/** * @throws Exception */
 	public function __construct(
-		private DrinkType $drinkType,
+		private DrinkTypeName $drinkTypeName,
+		private DrinkTypeCost $drinkTypeCost,
 		private OrderSugars $sugars,
 		private OrderMoney $money,
 		private OrderExtraHot $extraHot
@@ -21,11 +23,22 @@ final class Order
 		$this->validateMoneyWithDrinkTypeCost();
 	}
 	
-
-	public function drinkType() : DrinkType
+	/**
+	 * @return DrinkTypeName
+	 */
+	public function drinkTypeName() : DrinkTypeName
 	{
-		return $this->drinkType;
+		return $this->drinkTypeName;
 	}
+	
+	/**
+	 * @return DrinkTypeCost
+	 */
+	public function drinkTypeCost() : DrinkTypeCost
+	{
+		return $this->drinkTypeCost;
+	}
+	
 
 	public function sugars() : OrderSugars
 	{
@@ -47,8 +60,8 @@ final class Order
 	/** * @throws InvalidMoneyException */
 	private function validateMoneyWithDrinkTypeCost() : void
 	{
-		if($this->money->value() < $this->drinkType->cost()->value()){
-			throw new InvalidMoneyException($this->drinkType->name(), $this->drinkType->cost());
+		if($this->money->value() < $this->drinkTypeCost->value()){
+			throw new InvalidMoneyException($this->drinkTypeName, $this->drinkTypeCost);
 		}
 	}
 	

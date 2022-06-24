@@ -1,6 +1,6 @@
 <?php
 
-namespace GetWith\CoffeeMachine\Console\DrinkType\Domain\ValueObject;
+namespace GetWith\CoffeeMachine\Console\Shared\Domain\ValueObject;
 
 final class DrinkTypeCost
 {

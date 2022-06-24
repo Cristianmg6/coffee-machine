@@ -3,8 +3,8 @@
 namespace GetWith\CoffeeMachine\Console\Order\Domain\Exception;
 
 use Exception;
-use GetWith\CoffeeMachine\Console\DrinkType\Domain\ValueObject\DrinkTypeCost;
-use GetWith\CoffeeMachine\Console\DrinkType\Domain\ValueObject\DrinkTypeName;
+use GetWith\CoffeeMachine\Console\Shared\Domain\ValueObject\DrinkTypeCost;
+use GetWith\CoffeeMachine\Console\Shared\Domain\ValueObject\DrinkTypeName;
 
 final class InvalidMoneyException extends Exception
 {
