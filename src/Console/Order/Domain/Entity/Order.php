@@ -4,6 +4,7 @@ namespace GetWith\CoffeeMachine\Console\Order\Domain\Entity;
 
 use Exception;
 use GetWith\CoffeeMachine\Console\DrinkType\Domain\Entity\DrinkType;
+use GetWith\CoffeeMachine\Console\Order\Domain\Exception\InvalidMoneyException;
 use GetWith\CoffeeMachine\Console\Order\Domain\ValueObject\OrderExtraHot;
 use GetWith\CoffeeMachine\Console\Order\Domain\ValueObject\OrderMoney;
 use GetWith\CoffeeMachine\Console\Order\Domain\ValueObject\OrderSugars;
@@ -44,11 +45,11 @@ final class Order
 	}
 	
 	
-	/** * @throws Exception */
+	/** * @throws InvalidMoneyException */
 	private function validateMoneyWithDrinkTypeCost() : void
 	{
 		if($this->money->value() < $this->drinkType->cost()->value()){
-			throw new Exception("The {$this->drinkType->name()->value()} costs {$this->drinkType->cost()->value()}.");
+			throw new InvalidMoneyException($this->drinkType->name(), $this->drinkType->cost());
 		}
 	}
 	
