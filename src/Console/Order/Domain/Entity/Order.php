@@ -19,7 +19,6 @@ final class Order
 		private OrderExtraHot $extraHot
 	){
 		$this->validateMoneyWithDrinkTypeCost();
-		$this->validateSugarQuantity();
 	}
 	
 
@@ -50,14 +49,6 @@ final class Order
 	{
 		if($this->money->value() < $this->drinkType->cost()->value()){
 			throw new InvalidMoneyException($this->drinkType->name(), $this->drinkType->cost());
-		}
-	}
-	
-	/** * @throws Exception */
-	protected function validateSugarQuantity() : void
-	{
-		if(!($this->sugars->value() >= 0 && $this->sugars->value() <= 2)){
-			throw new Exception('The number of sugars should be between 0 and 2.');
 		}
 	}
 	
