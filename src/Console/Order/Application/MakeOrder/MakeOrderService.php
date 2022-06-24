@@ -12,7 +12,6 @@ final class MakeOrderService
 	public function __invoke(string $drinkType, float $money, int $sugars, bool $extraHot): string
 	{
 		try{
-			$this->validateDrinkType($drinkType);
 			$this->validateMoneyWithDrinkTypeCost($drinkType, $money);
 			$this->validateSugarQuantity($sugars);
 			return $this->getOrderResponse($drinkType, $extraHot, $sugars);
@@ -21,13 +20,6 @@ final class MakeOrderService
 		}
 	}
 	
-	/** * @throws Exception */
-	private function validateDrinkType(string $drinkType) : void
-	{
-		if(!in_array($drinkType, ['tea', 'coffee', 'chocolate'])){
-			throw new Exception('The drink type should be tea, coffee or chocolate.');
-		}
-	}
 	
 	/** * @throws Exception */
 	private function validateMoneyWithDrinkTypeCost(string $drinkType, float $money) : void
