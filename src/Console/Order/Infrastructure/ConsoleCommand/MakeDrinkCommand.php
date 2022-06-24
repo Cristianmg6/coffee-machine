@@ -2,6 +2,7 @@
 
 namespace GetWith\CoffeeMachine\Console\Order\Infrastructure\ConsoleCommand;
 
+use GetWith\CoffeeMachine\Console\DrinkType\Infrastructure\Repository\InMemoryDrinkTypeRepository;
 use GetWith\CoffeeMachine\Console\Order\Application\MakeOrder\MakeOrderQuery;
 use GetWith\CoffeeMachine\Console\Order\Application\MakeOrder\MakeOrderQueryHandler;
 use Symfony\Component\Console\Command\Command;
@@ -63,7 +64,7 @@ class MakeDrinkCommand extends Command
 		$extraHot  = $input->getOption(self::EXTRA_HOT_OPTION_NAME);
 		
 		$makeOrderQuery = new MakeOrderQuery($drinkType, $money, $sugars, $extraHot);
-		$makeOrderHandler = new MakeOrderQueryHandler();
+		$makeOrderHandler = new MakeOrderQueryHandler(new InMemoryDrinkTypeRepository());
 		$orderResponse = $makeOrderHandler($makeOrderQuery);
 		$output->writeln($orderResponse);
 		return 1;
