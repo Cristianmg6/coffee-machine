@@ -51,6 +51,9 @@ class MakeDrinkCommandTest extends IntegrationTestCase
     {
         return [
             [
+                'none', '0.7', 1, '', 'The drink type should be tea, coffee or chocolate.' . PHP_EOL
+            ],
+            [
                 'chocolate', '0.7', 1, '', 'You have ordered a chocolate with 1 sugars (stick included)' . PHP_EOL
             ],
             [
