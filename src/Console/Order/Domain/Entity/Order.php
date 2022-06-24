@@ -2,6 +2,7 @@
 
 namespace GetWith\CoffeeMachine\Console\Order\Domain\Entity;
 
+use Exception;
 use GetWith\CoffeeMachine\Console\DrinkType\Domain\Entity\DrinkType;
 use GetWith\CoffeeMachine\Console\Order\Domain\ValueObject\OrderExtraHot;
 use GetWith\CoffeeMachine\Console\Order\Domain\ValueObject\OrderMoney;
@@ -9,12 +10,16 @@ use GetWith\CoffeeMachine\Console\Order\Domain\ValueObject\OrderSugars;
 
 final class Order
 {
+	/** * @throws Exception */
 	public function __construct(
 		private DrinkType $drinkType,
 		private OrderSugars $sugars,
 		private OrderMoney $money,
 		private OrderExtraHot $extraHot
-	){ }
+	){
+		$this->validateMoneyWithDrinkTypeCost();
+		$this->validateSugarQuantity();
+	}
 	
 
 	public function drinkType() : DrinkType
@@ -38,5 +43,21 @@ final class Order
 		return $this->extraHot->value();
 	}
 	
+	
+	/** * @throws Exception */
+	private function validateMoneyWithDrinkTypeCost() : void
+	{
+		if($this->money->value() < $this->drinkType->cost()->value()){
+			throw new Exception("The {$this->drinkType->name()->value()} costs {$this->drinkType->cost()->value()}.");
+		}
+	}
+	
+	/** * @throws Exception */
+	protected function validateSugarQuantity() : void
+	{
+		if(!($this->sugars->value() >= 0 && $this->sugars->value() <= 2)){
+			throw new Exception('The number of sugars should be between 0 and 2.');
+		}
+	}
 	
 }

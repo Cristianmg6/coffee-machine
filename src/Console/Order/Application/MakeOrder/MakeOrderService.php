@@ -3,62 +3,31 @@
 namespace GetWith\CoffeeMachine\Console\Order\Application\MakeOrder;
 
 use Exception;
-use Throwable;
+use GetWith\CoffeeMachine\Console\DrinkType\Domain\Entity\DrinkType;
+use GetWith\CoffeeMachine\Console\Order\Domain\Entity\Order;
+use GetWith\CoffeeMachine\Console\Order\Domain\ValueObject\OrderExtraHot;
+use GetWith\CoffeeMachine\Console\Order\Domain\ValueObject\OrderMoney;
+use GetWith\CoffeeMachine\Console\Order\Domain\ValueObject\OrderSugars;
 
 final class MakeOrderService
 {
 	public function __construct(){ }
 	
-	public function __invoke(string $drinkType, float $money, int $sugars, bool $extraHot): string
-	{
-		try{
-			$this->validateMoneyWithDrinkTypeCost($drinkType, $money);
-			$this->validateSugarQuantity($sugars);
-			return $this->getOrderResponse($drinkType, $extraHot, $sugars);
-		}catch(Throwable $e){
-			return $e->getMessage();
-		}
-	}
-	
-	
 	/** * @throws Exception */
-	private function validateMoneyWithDrinkTypeCost(string $drinkType, float $money) : void
+	public function __invoke(DrinkType $drinkType, OrderMoney $money, OrderSugars $sugars, OrderExtraHot $extraHot): string
 	{
-		switch($drinkType){
-			case 'tea':
-				if($money < 0.4){
-					throw new Exception('The tea costs 0.4.');
-				}
-				break;
-			case 'coffee':
-				if($money < 0.5){
-					throw new Exception('The coffee costs 0.5.');
-				}
-				break;
-			case 'chocolate':
-				if($money < 0.6){
-					throw new Exception('The chocolate costs 0.6.');
-				}
-				break;
-		}
+		$order = new Order($drinkType, $sugars, $money, $extraHot);
+		return $this->getOrderResponse($order);
 	}
 	
-	/** * @throws Exception */
-	protected function validateSugarQuantity(int $sugars) : void
+	protected function getOrderResponse(Order $order) : string
 	{
-		if(!($sugars >= 0 && $sugars <= 2)){
-			throw new Exception('The number of sugars should be between 0 and 2.');
-		}
-	}
-	
-	protected function getOrderResponse(string $drinkType, bool $extraHot, int $sugars) : string
-	{
-		$response = 'You have ordered a '.$drinkType;
-		if($extraHot){
+		$response = 'You have ordered a '.$order->drinkType()->name()->value();
+		if($order->isExtraHot()){
 			$response .= ' extra hot';
 		}
-		if($sugars > 0){
-			$response .= ' with '.$sugars.' sugars (stick included)';
+		if($order->sugars()->value() > 0){
+			$response .= ' with ' . $order->sugars()->value() . ' sugars (stick included)';
 		}
 		return $response;
 	}
