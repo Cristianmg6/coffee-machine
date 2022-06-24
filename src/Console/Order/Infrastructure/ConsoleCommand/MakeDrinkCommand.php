@@ -2,6 +2,8 @@
 
 namespace GetWith\CoffeeMachine\Console\Order\Infrastructure\ConsoleCommand;
 
+use GetWith\CoffeeMachine\Console\Order\Application\MakeOrder\MakeOrderQuery;
+use GetWith\CoffeeMachine\Console\Order\Application\MakeOrder\MakeOrderQueryHandler;
 use GetWith\CoffeeMachine\Console\Order\Application\MakeOrder\MakeOrderService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -61,8 +63,9 @@ class MakeDrinkCommand extends Command
 		$sugars    = $input->getArgument(self::SUGARS_ARGUMENT_NAME);
 		$extraHot  = $input->getOption(self::EXTRA_HOT_OPTION_NAME);
 		
-		$makeOrderService = new MakeOrderService();
-		$orderResponse = $makeOrderService($drinkType, $money, $sugars, $extraHot);
+		$makeOrderQuery = new MakeOrderQuery($drinkType, $money, $sugars, $extraHot);
+		$makeOrderHandler = new MakeOrderQueryHandler();
+		$orderResponse = $makeOrderHandler($makeOrderQuery);
 		$output->writeln($orderResponse);
 		return 1;
 	}
