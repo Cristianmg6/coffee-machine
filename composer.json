@@ -19,7 +19,8 @@
     "phpunit/phpunit": "^9.5",
     "infection/infection": "^0.26.6",
     "mockery/mockery": "^1.5",
-    "fakerphp/faker": "^1.19"
+    "fakerphp/faker": "^1.19",
+    "symfony/deprecation-contracts": "3.0.1"
   },
   "config": {
     "allow-plugins": {
