@@ -15,11 +15,10 @@ final class MakeOrderService
 	public function __construct(){ }
 	
 	/** * @throws Exception */
-	public function __invoke(DrinkTypeName $drinkTypeName, DrinkTypeCost $drinkTypeCost, OrderMoney $money, OrderSugars $sugars, OrderExtraHot $extraHot): string
+	public function __invoke(DrinkTypeName $drinkTypeName, DrinkTypeCost $drinkTypeCost, OrderMoney $money, OrderSugars $sugars, OrderExtraHot $extraHot): OrderResponse
 	{
 		$order = new Order($drinkTypeName, $drinkTypeCost, $sugars, $money, $extraHot);
-		$orderResponse = new OrderResponse($order);
-		return $orderResponse->toString();
+		return new OrderResponse($order);
 	}
 	
 }

@@ -11,7 +11,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class MakeDrinkCommand extends Command
+class MakeOrderCommand extends Command
 {
 	protected static $defaultName = 'app:order-drink';
 	
@@ -27,7 +27,7 @@ class MakeDrinkCommand extends Command
 	
 	public function __construct()
 	{
-		parent::__construct(MakeDrinkCommand::$defaultName);
+		parent::__construct(MakeOrderCommand::$defaultName);
 	}
 	
 	protected function configure() : void

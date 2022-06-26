@@ -18,6 +18,14 @@ final class DrinkTypeMother
 			DrinkTypeCostMother::random()
 		);
 	}
+	public static function randomWithCost(float $cost): DrinkType
+	{
+		return new DrinkType(
+			DrinkTypeIdMother::random(),
+			DrinkTypeNameMother::random(),
+			DrinkTypeCostMother::create($cost)
+		);
+	}
 	
 	public static function collectionOf(int $count): DrinkTypeCollection
 	{

@@ -8,6 +8,7 @@ final class OrderResponse
 {
 	public function __construct(private Order $order){ }
 	
+	
 	public function toString() : string
 	{
 		$response = 'You have ordered a '.$this->order->drinkTypeName()->value();

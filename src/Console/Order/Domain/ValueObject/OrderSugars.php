@@ -6,8 +6,8 @@ use GetWith\CoffeeMachine\Console\Order\Domain\Exception\InvalidSugarQuantityExc
 
 final class OrderSugars
 {
-	private const MIN_QUANTITY_REQUIRED = 0;
-	private const MAX_QUANTITY_REQUIRED = 2;
+	const MIN_QUANTITY_REQUIRED = 0;
+	const MAX_QUANTITY_REQUIRED = 2;
 	
 	/** * @throws InvalidSugarQuantityException */
 	public function __construct(private int $sugars)

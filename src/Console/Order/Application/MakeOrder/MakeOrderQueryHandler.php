@@ -26,13 +26,14 @@ final class MakeOrderQueryHandler
 	{
 		try{
 			$drinkType = $this->getDrinkTypeByNameService->handle(new DrinkTypeName($query->drinkTypeName()));
-			return $this->makeOrderService->__invoke(
+			$orderResponse = $this->makeOrderService->__invoke(
 				$drinkType->name(),
 				$drinkType->cost(),
 				new OrderMoney($query->money()),
 				new OrderSugars($query->sugars()),
 				new OrderExtraHot($query->extraHot())
 			);
+			return $orderResponse->toString();
 		}catch(Throwable $e){
 			return $e->getMessage();
 		}

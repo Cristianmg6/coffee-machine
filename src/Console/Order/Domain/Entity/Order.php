@@ -12,34 +12,28 @@ use GetWith\CoffeeMachine\Console\Order\Domain\ValueObject\OrderSugars;
 
 final class Order
 {
-	/** * @throws Exception */
+	/** * @throws InvalidMoneyException */
 	public function __construct(
 		private DrinkTypeName $drinkTypeName,
 		private DrinkTypeCost $drinkTypeCost,
 		private OrderSugars $sugars,
 		private OrderMoney $money,
 		private OrderExtraHot $extraHot
-	){
+	)
+	{
 		$this->validateMoneyWithDrinkTypeCost();
 	}
 	
-	/**
-	 * @return DrinkTypeName
-	 */
 	public function drinkTypeName() : DrinkTypeName
 	{
 		return $this->drinkTypeName;
 	}
 	
-	/**
-	 * @return DrinkTypeCost
-	 */
 	public function drinkTypeCost() : DrinkTypeCost
 	{
 		return $this->drinkTypeCost;
 	}
 	
-
 	public function sugars() : OrderSugars
 	{
 		return $this->sugars;
@@ -50,12 +44,15 @@ final class Order
 		return $this->money;
 	}
 	
-
+	public function extraHot() : OrderExtraHot
+	{
+		return $this->extraHot;
+	}
+	
 	public function isExtraHot() : bool
 	{
 		return $this->extraHot->value();
 	}
-	
 	
 	/** * @throws InvalidMoneyException */
 	private function validateMoneyWithDrinkTypeCost() : void
