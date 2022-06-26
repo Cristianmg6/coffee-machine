@@ -7,7 +7,8 @@
   "autoload-dev": {
     "psr-4": {
       "GetWith\\CoffeeMachine\\Tests\\Unit\\": "tests/Unit",
-      "GetWith\\CoffeeMachine\\Tests\\Integration\\": "tests/Integration"
+      "GetWith\\CoffeeMachine\\Tests\\Integration\\": "tests/Integration",
+      "GetWith\\CoffeeMachine\\Tests\\Utils\\": "tests/Utils"
     }
   },
   "require": {
@@ -16,7 +17,9 @@
   },
   "require-dev": {
     "phpunit/phpunit": "^9.5",
-    "infection/infection": "^0.26.6"
+    "infection/infection": "^0.26.6",
+    "fakerphp/faker": "^1.9.1",
+    "mockery/mockery": "^1.5"
   },
   "config": {
     "allow-plugins": {
@@ -25,7 +28,13 @@
   },
   "scripts": {
     "test": [
-      "vendor/bin/phpunit --no-coverage"
+      "vendor/bin/phpunit --testsuite all --no-coverage"
+    ],
+    "test-coverage": [
+      "vendor/bin/phpunit --testsuite all --coverage-html ./reports"
+    ],
+    "test-cov-unit": [
+      "vendor/bin/phpunit --testsuite unit --coverage-html ./reports"
     ]
   }
 }
