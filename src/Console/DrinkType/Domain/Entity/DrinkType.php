@@ -6,7 +6,7 @@ use GetWith\CoffeeMachine\Console\Shared\Domain\ValueObject\DrinkTypeCost;
 use GetWith\CoffeeMachine\Console\DrinkType\Domain\ValueObject\DrinkTypeId;
 use GetWith\CoffeeMachine\Console\Shared\Domain\ValueObject\DrinkTypeName;
 
-final class DrinkType
+class DrinkType
 {
 	public function __construct(
 		private DrinkTypeId $id,
