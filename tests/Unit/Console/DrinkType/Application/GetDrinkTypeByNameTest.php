@@ -25,7 +25,9 @@ class GetDrinkTypeByNameTest extends DrinkTypeModuleUnitTestCase
 		$drinkType = DrinkTypeMother::random();
 		$this->shouldGetDrinkTypeByName($drinkType);
 		$result = $this->service->handle($drinkType->name());
-		$this->assertEquals($drinkType, $result);
+		$this->assertEquals($drinkType->id()->value(), $result->id()->value());
+		$this->assertEquals($drinkType->name()->value(), $result->name()->value());
+		$this->assertEquals($drinkType->cost()->value(), $result->cost()->value());
 	}
 	
 	/** @test */
@@ -37,5 +39,6 @@ class GetDrinkTypeByNameTest extends DrinkTypeModuleUnitTestCase
 		$this->shouldNotFoundDrinkTypeByName($drinkTypeName);
 		$this->service->handle($drinkTypeName);
 	}
+	
 	
 }
