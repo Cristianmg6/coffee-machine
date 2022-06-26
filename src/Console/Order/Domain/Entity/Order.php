@@ -2,7 +2,6 @@
 
 namespace GetWith\CoffeeMachine\Console\Order\Domain\Entity;
 
-use Exception;
 use GetWith\CoffeeMachine\Console\Shared\Domain\ValueObject\DrinkTypeCost;
 use GetWith\CoffeeMachine\Console\Shared\Domain\ValueObject\DrinkTypeName;
 use GetWith\CoffeeMachine\Console\Order\Domain\Exception\InvalidMoneyException;

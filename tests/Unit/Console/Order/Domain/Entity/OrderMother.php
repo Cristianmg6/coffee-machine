@@ -4,8 +4,6 @@ namespace GetWith\CoffeeMachine\Tests\Unit\Console\Order\Domain\Entity;
 
 use GetWith\CoffeeMachine\Console\DrinkType\Domain\Entity\DrinkType;
 use GetWith\CoffeeMachine\Console\Order\Domain\Entity\Order;
-use GetWith\CoffeeMachine\Console\Order\Domain\Exception\InvalidMoneyException;
-use GetWith\CoffeeMachine\Console\Order\Domain\Exception\InvalidSugarQuantityException;
 use GetWith\CoffeeMachine\Tests\Unit\Console\Order\Domain\ValueObject\OrderExtraHotMother;
 use GetWith\CoffeeMachine\Tests\Unit\Console\Order\Domain\ValueObject\OrderMoneyMother;
 use GetWith\CoffeeMachine\Tests\Unit\Console\Order\Domain\ValueObject\OrderSugarsMother;

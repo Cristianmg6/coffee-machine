@@ -4,7 +4,6 @@ namespace GetWith\CoffeeMachine\Tests\Unit\Console\Order\Application;
 
 use GetWith\CoffeeMachine\Console\Order\Application\MakeOrder\MakeOrderQuery;
 use GetWith\CoffeeMachine\Console\Order\Application\MakeOrder\MakeOrderQueryHandler;
-use GetWith\CoffeeMachine\Console\Order\Application\MakeOrder\MakeOrderService;
 use GetWith\CoffeeMachine\Console\Order\Application\MakeOrder\OrderResponse;
 use GetWith\CoffeeMachine\Console\Order\Domain\Exception\InvalidMoneyException;
 use GetWith\CoffeeMachine\Console\Order\Domain\Exception\InvalidSugarQuantityException;
@@ -17,7 +16,6 @@ use GetWith\CoffeeMachine\Tests\Unit\Console\Order\OrderModuleUnitTestCase;
 
 class MakeOrderTest extends OrderModuleUnitTestCase
 {
-	private MakeOrderService $service;
 	
 	protected function setUp() : void
 	{

@@ -3,7 +3,6 @@
 namespace GetWith\CoffeeMachine\Tests\Unit\Console\DrinkType\Application;
 
 use GetWith\CoffeeMachine\Console\DrinkType\Application\GetByName\GetDrinkTypeByNameService;
-use GetWith\CoffeeMachine\Console\DrinkType\Domain\Contract\DrinkTypeRepositoryInterface;
 use GetWith\CoffeeMachine\Console\DrinkType\Domain\Exception\DrinkTypeNotFoundException;
 use GetWith\CoffeeMachine\Tests\Unit\Console\DrinkType\Domain\Entity\DrinkTypeMother;
 use GetWith\CoffeeMachine\Tests\Unit\Console\DrinkType\DrinkTypeModuleUnitTestCase;
